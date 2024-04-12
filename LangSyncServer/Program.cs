@@ -1,4 +1,5 @@
 using LangSync;
+using LangSyncServer.utils;
 
 namespace LangSyncServer
 {
@@ -10,8 +11,11 @@ namespace LangSyncServer
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+
+            string dotEnv = Path.Combine(Helpers.getRoot(), ".env");
+            config.DotEnv.Load(dotEnv);
+
+            Firebase.init();
             ApplicationConfiguration.Initialize();
             Application.Run(new FormIntro());
         }

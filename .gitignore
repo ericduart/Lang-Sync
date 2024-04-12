@@ -441,3 +441,6 @@ local.properties
 /build
 
 google-services.json
+
+.env
+firebase_config.json
