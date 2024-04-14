@@ -15,6 +15,8 @@ namespace LangSyncServer
             string dotEnv = Path.Combine(Helpers.getRoot(), ".env");
             config.DotEnv.Load(dotEnv);
 
+            Helpers.initLogs();
+
             Firebase.init();
             ApplicationConfiguration.Initialize();
             Application.Run(new FormIntro());

@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Google.Api;
+using LangSyncServer.forms;
+using LangSyncServer.utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +17,13 @@ namespace LangSync.forms
 {
     public partial class FormGrammar : Form
     {
+
+        private List<Constants.GrammarItem> grammarItems;
+
         public FormGrammar()
         {
             InitializeComponent();
+            grammarItems = new List<Constants.GrammarItem>();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -27,11 +34,7 @@ namespace LangSync.forms
                 return;
             }
 
-            Label grammar = new Label();
-            grammar.AutoSize = true;
-            grammar.Text = $"English: {textBoxEnglish.Text}     Spanish: {textBoxSpanish.Text}";
-
-            flowLayoutPanel1.Controls.Add(grammar);
+            addGrammar(textBoxEnglish.Text, textBoxSpanish.Text);
         }
 
         private void flowLayoutPanel1_DragEnter(object sender, DragEventArgs e)
@@ -74,6 +77,8 @@ namespace LangSync.forms
             grammar.AutoSize = true;
             grammar.Text = $"English: {english}     Spanish: {spanish}";
 
+            grammarItems.Add(new Constants.GrammarItem { english = english, spanish = spanish });
+
             flowLayoutPanel1.Controls.Add(grammar);
 
 
@@ -87,6 +92,16 @@ namespace LangSync.forms
         private void button2_Click(object sender, EventArgs e)
         {
 
+            if (flowLayoutPanel1.Controls.Count == 0)
+            {
+                MessageBox.Show("At least add 1 vocabulary");
+                return;
+            }
+
+            Hide();
+            FormWaitingPlayers form = new FormWaitingPlayers(grammarItems);
+            form.Closed += (s, args) => this.Close();
+            form.Show();
         }
     }
 }
