@@ -1,5 +1,6 @@
 package es.ericd.langsync
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -42,7 +43,10 @@ class LoginActivity : AppCompatActivity(), LoginFragment.LoginFragmentInterface,
 
                 withContext(Dispatchers.Main) {
 
-                    Snackbar.make(rootView, "Successfully logged in", Snackbar.LENGTH_LONG).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+
+                    startActivity(intent)
+                    finish()
 
                 }
             } catch (e: Exception) {
