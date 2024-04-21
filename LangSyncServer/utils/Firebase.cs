@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Api;
 using Google.Cloud.Firestore;
+using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 
 namespace LangSyncServer.utils
@@ -49,8 +50,9 @@ namespace LangSyncServer.utils
                 if (!snapshot.Exists)
                 {
 
-                    var objects = grammarItems.Select(item => new { english = item.english, spanish = item.spanish }).ToArray();
-                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, currentGrammar = "" }) ;
+                    var objects = grammarItems.Select(item => new { english = item.english, spanish = item.spanish, playersData = new { } }).ToArray();
+
+                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, currentGrammar = new  { english = "", spanish = "" } });
 
                     return true;
                 }
@@ -68,7 +70,6 @@ namespace LangSyncServer.utils
         {
             return database.Collection(PARTIES_COLLECTION_NAME).Document(partyCode);
         }
-
 
 
     }

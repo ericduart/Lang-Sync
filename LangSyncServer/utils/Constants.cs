@@ -14,6 +14,21 @@ namespace LangSyncServer.utils
             public string english { get; set; }
             public string spanish { get; set; }
 
+            public GrammarItem() { }
+
+        }
+
+        public class PlayerData
+        {
+            public string name { get; set; }
+
+            public string grammar { get; set; }
+
+            public string userInput { get; set; }
+            public bool isCorrect { get; set; }
+
+            public PlayerData() { }
+
         }
 
     }
