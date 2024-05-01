@@ -1,15 +1,15 @@
-﻿using Google.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace LangSyncServer.utils
 {
     internal class Helpers
     {
-
         private static string logRoute;
 
         public static string getRoot()
@@ -27,36 +27,39 @@ namespace LangSyncServer.utils
 
         }
 
-        public static void changeLabelTextSafe(Label label, string newText)
+        public static void ChangeLabelTextSafe(Label label, string newText)
         {
-            if (label.InvokeRequired)
+            if (label.Dispatcher.CheckAccess())
             {
-                label.Invoke(new Action(() => { label.Text = newText; }));
-            } else
+                label.Content = newText;
+            }
+            else
             {
-                label.Text = newText;
+                label.Dispatcher.Invoke(new Action(() => { label.Content = newText; }));
             }
         }
 
-        public static void AddLabelToFlowLayoutSafe(FlowLayoutPanel flowLayoutPanel, Label label)
+        public static void AddLabelToWrapPanelSafe(WrapPanel panel, Label label)
         {
-            if (flowLayoutPanel.InvokeRequired)
+            if (panel.Dispatcher.CheckAccess())
             {
-                flowLayoutPanel.Invoke(new Action(() => { flowLayoutPanel.Controls.Add(label); }));
-            } else
+                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Add(label); }));
+            }
+            else
             {
-                flowLayoutPanel.Controls.Add(label);
+                panel.Children.Add(label);
             }
         }
 
-        public static void CleanFlowLayoutContentSafe(FlowLayoutPanel flowLayoutPanel)
+        public static void CleanWrapPanelContentSafe(WrapPanel panel)
         {
-            if (flowLayoutPanel.InvokeRequired)
+            if (panel.Dispatcher.CheckAccess())
             {
-                flowLayoutPanel.Invoke(new Action(() => { flowLayoutPanel.Controls.Clear(); }));
-            } else
+                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Clear(); }));
+            }
+            else
             {
-
+                panel.Children.Clear();
             }
         }
 

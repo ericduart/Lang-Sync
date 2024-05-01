@@ -1,13 +1,10 @@
-﻿
+﻿using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Google.Api;
-using Google.Cloud.Firestore;
-using Google.Protobuf.Collections;
-using Google.Protobuf.WellKnownTypes;
 
 namespace LangSyncServer.utils
 {
@@ -52,14 +49,15 @@ namespace LangSyncServer.utils
 
                     var objects = grammarItems.Select(item => new { english = item.english, spanish = item.spanish }).ToArray();
 
-                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, gameEnded = false, currentGrammar = new  { english = "", spanish = "" } });
+                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, gameEnded = false, currentGrammar = new { english = "", spanish = "" } });
 
                     return true;
                 }
                 else return false;
 
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }
@@ -83,7 +81,6 @@ namespace LangSyncServer.utils
             return true;
 
         }
-
 
     }
 }

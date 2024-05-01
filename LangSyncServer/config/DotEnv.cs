@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,6 @@ namespace LangSyncServer.config
 {
     internal class DotEnv
     {
-
         public class Keys
         {
             public static string TOKEN = "";

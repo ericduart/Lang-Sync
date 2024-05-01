@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangSyncServer", "LangSyncServer.csproj", "{BAA54F03-2957-4F61-A0C5-EF2822FC5DFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangSyncServer", "LangSyncServer.csproj", "{52AD68BC-372A-47E9-92BB-674E6CC1D3A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BAA54F03-2957-4F61-A0C5-EF2822FC5DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAA54F03-2957-4F61-A0C5-EF2822FC5DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAA54F03-2957-4F61-A0C5-EF2822FC5DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAA54F03-2957-4F61-A0C5-EF2822FC5DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AD68BC-372A-47E9-92BB-674E6CC1D3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AD68BC-372A-47E9-92BB-674E6CC1D3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AD68BC-372A-47E9-92BB-674E6CC1D3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AD68BC-372A-47E9-92BB-674E6CC1D3A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3A42E93D-7FAB-4C05-8A92-727B5554C2AB}
+		SolutionGuid = {EF8CD58E-B354-4811-9A30-D84A17BEFC4D}
 	EndGlobalSection
 EndGlobal
