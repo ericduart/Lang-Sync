@@ -1,5 +1,6 @@
 package es.ericd.langsync.fragments.dashboard
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -47,14 +48,14 @@ class PregameFragment() : Fragment() {
 
     fun setListener() {
         lifecycleScope.launch(Dispatchers.IO) {
-            FirestoreService.getDocPlayersChanges(partyCode).collect {
+            FirestoreService.getDocPlayersChanges(partyCode, PREGAME).collect {
                 withContext(Dispatchers.Main) {
 
                     if (it != null) {
 
                         binding.scrollViewLinearLayout.removeAllViews()
 
-                        it.forEach {player ->
+                        it.players.forEach {player ->
                             val playerLabel = TextView(requireContext())
 
                             playerLabel.text = player
@@ -85,6 +86,7 @@ class PregameFragment() : Fragment() {
 
     companion object {
         val PARTY_CODE = "PARTY_CODE"
+        val PREGAME = "PREGAME"
     }
 
 }

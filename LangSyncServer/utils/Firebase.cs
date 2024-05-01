@@ -50,9 +50,9 @@ namespace LangSyncServer.utils
                 if (!snapshot.Exists)
                 {
 
-                    var objects = grammarItems.Select(item => new { english = item.english, spanish = item.spanish, playersData = new { } }).ToArray();
+                    var objects = grammarItems.Select(item => new { english = item.english, spanish = item.spanish }).ToArray();
 
-                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, currentGrammar = new  { english = "", spanish = "" } });
+                    await doc.CreateAsync(new { players = new List<object>(), grammar = objects, canJoin = true, gameEnded = false, currentGrammar = new  { english = "", spanish = "" } });
 
                     return true;
                 }
@@ -69,6 +69,19 @@ namespace LangSyncServer.utils
         public static DocumentReference GetDocumentReference(string partyCode)
         {
             return database.Collection(PARTIES_COLLECTION_NAME).Document(partyCode);
+        }
+
+        public static async Task<bool> CloseGame(string PartyCode)
+        {
+            var doc = database.Collection(PARTIES_COLLECTION_NAME).Document(PartyCode);
+
+            var snapshot = await doc.GetSnapshotAsync();
+
+            if (snapshot.Exists) await doc.UpdateAsync(new Dictionary<string, object> { { "gameEnded", true } });
+
+
+            return true;
+
         }
 
 

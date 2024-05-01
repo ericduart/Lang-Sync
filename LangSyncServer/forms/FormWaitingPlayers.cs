@@ -28,6 +28,7 @@ namespace LangSyncServer.forms
         private DocumentReference partyRef;
         private List<string> players;
         private bool isGameStarted = false;
+        private string partyCode = string.Empty;
 
         public FormWaitingPlayers(List<Constants.GrammarItem> items)
         {
@@ -74,6 +75,7 @@ namespace LangSyncServer.forms
             }
 
             partyRef = Firebase.GetDocumentReference(randomPartyCode);
+            partyCode = randomPartyCode;
 
             listenForPlayers(partyRef);
         }
@@ -215,7 +217,10 @@ namespace LangSyncServer.forms
 
             if (currentGrammar == null)
             {
-                // Post partida
+                await Firebase.CloseGame(partyCode);
+
+                Close();
+
             } else
             {
 
