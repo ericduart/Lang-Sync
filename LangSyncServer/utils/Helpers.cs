@@ -43,11 +43,11 @@ namespace LangSyncServer.utils
         {
             if (panel.Dispatcher.CheckAccess())
             {
-                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Add(label); }));
+                panel.Children.Add(label);
             }
             else
             {
-                panel.Children.Add(label);
+                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Add(label); }));
             }
         }
 
@@ -55,11 +55,11 @@ namespace LangSyncServer.utils
         {
             if (panel.Dispatcher.CheckAccess())
             {
-                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Clear(); }));
+                panel.Children.Clear();
             }
             else
             {
-                panel.Children.Clear();
+                panel.Dispatcher.Invoke(new Action(() => { panel.Children.Clear(); }));
             }
         }
 

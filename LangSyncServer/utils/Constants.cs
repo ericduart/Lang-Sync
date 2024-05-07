@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LangSyncServer.utils
 {
-    internal class Constants
+    public class Constants
     {
         public class GrammarItem
         {
