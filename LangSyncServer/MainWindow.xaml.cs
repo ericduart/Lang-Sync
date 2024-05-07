@@ -40,14 +40,15 @@ namespace LangSyncServer
 
             Task.Run(() =>
             {
-                Helpers.ChangeLabelTextSafe(lblInfo, "Loading environment variables");
+                
+                Helpers.ChangeLabelTextSafe(lblInfo, "Loading Firebase");
+
                 string dotEnv = Path.Combine(Helpers.getRoot(), ".env");
                 config.DotEnv.Load(dotEnv);
 
-                Helpers.ChangeLabelTextSafe(lblInfo, "Setting logs");
                 Helpers.initLogs();
 
-                Helpers.ChangeLabelTextSafe(lblInfo, "Loading Firebase");
+                Thread.Sleep(500);
                 Firebase.init();
 
                 pbLoader.Dispatcher.Invoke(new Action(() => { pbLoader.Visibility = Visibility.Hidden; }));

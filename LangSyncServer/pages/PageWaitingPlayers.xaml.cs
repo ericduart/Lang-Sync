@@ -20,9 +20,9 @@ namespace LangSyncServer.pages
     /// <summary>
     /// Lógica de interacción para Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class PageWaitingPlayers : Page
     {
-        public Page1(List<Constants.GrammarItem> items)
+        public PageWaitingPlayers(List<Constants.GrammarItem> items)
         {
             InitializeComponent();
 

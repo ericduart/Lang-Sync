@@ -42,7 +42,7 @@ namespace LangSyncServer.windows
         {
             InitializeComponent();
             this.grammarItems = items;
-            content.Content = new pages.Page1(grammarItems);
+            content.Content = new pages.PageWaitingPlayers(grammarItems);
 
             players = new List<string>();
             playersData = new List<PlayerData>();
@@ -66,11 +66,11 @@ namespace LangSyncServer.windows
                 try
                 {
 
-                    Page1 page1 = null;
+                    PageWaitingPlayers page1 = null;
 
 
                     Application.Current.Dispatcher.Invoke(delegate () {
-                        page1 = content.Content as Page1;
+                        page1 = content.Content as PageWaitingPlayers;
                     });
 
 
