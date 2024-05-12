@@ -119,7 +119,7 @@ class GameFragment : Fragment() {
 
                     val numPoints = currentPlayerData?.grammar?.count{it.isCorrect}
 
-                    binding.tvPoints.text = "${numPoints ?: "Could not load points"}"
+                    binding.tvPoints.text = "${numPoints ?: "0"}"
 
 
                 }
