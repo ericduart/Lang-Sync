@@ -8,9 +8,21 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\Tick.png" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" Version="3.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\Tick.png" />
   </ItemGroup>
 
 </Project>
