@@ -201,7 +201,7 @@ namespace LangSyncServer.windows
                     if (playersData.Count > 0) pagePlayersData?.setPlayersCount(playersData.Count, players.Count);
                 } catch (Exception ex)
                 {
-
+                    utils.Helpers.logging(ex.Message);
                 }
 
 
@@ -233,8 +233,14 @@ namespace LangSyncServer.windows
 
             if (currentGrammar == null)
             {
-                await Firebase.CloseGame(partyCode);
+                var partyData = await Firebase.CloseGame(partyCode);              
+
+
+                WindowPostGame window = new WindowPostGame(partyData);
+
+                window.Show();
                 Close();
+
             } else
             {
                 await partyRef.UpdateAsync(new Dictionary<string, object>() { { "currentGrammar", new { english = currentGrammar.english, spanish = currentGrammar.spanish } } });

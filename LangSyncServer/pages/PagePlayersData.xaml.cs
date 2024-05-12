@@ -58,12 +58,20 @@ namespace LangSyncServer.pages
 
         public void setPlayerData(Constants.PlayerData pData)
         {
-            dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect });
+            if (dataGridPlayersData.CheckAccess()) {
+                dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect });
+
+            } else
+            {
+                dataGridPlayersData.Dispatcher.Invoke(new Action(() => {
+                    dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect });
+                }));
+            }
         }
 
         public void clearDataGrid()
         {
-            dataGridPlayersData.Items.Clear();
+            Helpers.cleanDataGridSafe(dataGridPlayersData);
         }
 
     }

@@ -26,13 +26,11 @@ namespace LangSyncServer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
             WindowGrammar window = new WindowGrammar();
 
             window.Show();
             Close();
 
-            
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

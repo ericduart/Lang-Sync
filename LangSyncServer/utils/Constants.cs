@@ -30,5 +30,12 @@ namespace LangSyncServer.utils
             public PlayerData() { }
 
         }
+
+        public class PartyData
+        {
+            public string PartyCode { get; set; }
+            public Dictionary<string, List<PlayerData>> dataPlayers { get; set; }
+            public List<string> playersRanking { get; set; }
+        }
     }
 }

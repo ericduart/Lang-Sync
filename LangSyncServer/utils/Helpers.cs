@@ -63,6 +63,17 @@ namespace LangSyncServer.utils
             }
         }
 
+        public static void cleanDataGridSafe(DataGrid data)
+        {
+            if (data.Dispatcher.CheckAccess())
+            {
+                data.Items.Clear();
+            } else
+            {
+                data.Dispatcher.Invoke(new Action(data.Items.Clear));
+            }
+        }
+
         public static void initLogs()
         {
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
