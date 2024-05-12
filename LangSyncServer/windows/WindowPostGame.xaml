@@ -7,11 +7,8 @@
         mc:Ignorable="d"
         Title="WindowPostGame" Height="450" Width="800">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Width="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="Auto">
             <StackPanel x:Name="stackPanelPlayers" HorizontalAlignment="Left" Width="200">
-                <Label Content="Label" Height="300"/>
-                <Label Content="Label" Height="300"/>
-                <Label Content="Label" Height="300"/>
 
             </StackPanel>
         </ScrollViewer>
