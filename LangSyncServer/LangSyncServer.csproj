@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\Cross.png" />
     <None Remove="assets\Tick.png" />
   </ItemGroup>
 
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\Cross.png" />
     <Resource Include="assets\Tick.png" />
   </ItemGroup>
 

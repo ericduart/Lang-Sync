@@ -36,6 +36,14 @@ namespace LangSyncServer.utils
             public string PartyCode { get; set; }
             public Dictionary<string, List<PlayerData>> dataPlayers { get; set; }
             public List<string> playersRanking { get; set; }
+
+            public PartyData()
+            {
+                PartyCode = string.Empty;
+                dataPlayers = new Dictionary<string, List<PlayerData>>();
+                playersRanking = new List<string>();
+            }
+
         }
     }
 }

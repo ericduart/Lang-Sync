@@ -12,13 +12,15 @@
 
             </StackPanel>
         </ScrollViewer>
-        <DataGrid HorizontalAlignment="Stretch" Margin="242,20,20,20" x:Name="dataGridPlayerData">
+        <DataGrid HorizontalAlignment="Stretch" Margin="242,20,20,65" x:Name="dataGridPlayerData">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="English" Width="*" Binding="{Binding option}" />
                 <DataGridTextColumn Header="USER INPUT" Width="*" Binding="{Binding userInput}"/>
                 <DataGridTextColumn Header="Is correct" Width="*" Binding="{Binding isCorrect}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Content="Close" Width="150" Height="40" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="242,0,0,10" Click="Button_Click" />
 
     </Grid>
 </Window>

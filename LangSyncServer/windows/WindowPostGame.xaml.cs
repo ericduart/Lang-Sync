@@ -78,5 +78,22 @@ namespace LangSyncServer.windows
             }
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            WindowMSG windowMSG = new WindowMSG("Do you want to start a new party?");
+
+            var result = (bool)windowMSG.ShowDialog();
+
+            
+            if (result)
+            {
+                WindowGrammar window = new WindowGrammar();
+                window.Show();
+            }
+
+            Close();
+
+        }
     }
 }
