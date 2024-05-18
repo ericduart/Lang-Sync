@@ -61,13 +61,14 @@ class PostGameFragment : Fragment() {
         binding.rankingRecView.adapter = RankingAdapter(requireContext(), players, inputClick)
         binding.rankingRecView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        setRecview()
+
+        // setRecview()
+
+        init()
 
         binding.btnCurrentUserData.setOnClickListener {
-            if (players.isEmpty()) return@setOnClickListener
-
             val currentPlayer = players.find { it.user.equals(FirebaseAuth.getCurrentUser()?.displayName) }
-
+            if (players.isEmpty()) return@setOnClickListener
             if (currentPlayer == null) return@setOnClickListener
 
             ShowDataPostGameDialogFragment(currentPlayer.user, currentPlayer.grammar.toMutableList()).show(requireActivity().supportFragmentManager, "")
@@ -81,23 +82,38 @@ class PostGameFragment : Fragment() {
         return binding.root
     }
 
-    fun setRecview() {
-        lifecycleScope.launch(Dispatchers.IO) {
+    fun saveStats(plist: MutableList<FirestorePlayersChosesDataClass>) {
 
+        val player = plist.find { it.user.equals(FirebaseAuth.getCurrentUser()?.displayName) }
+
+        if (player == null) return
+
+        val position = plist.indexOfFirst { it.user.equals(FirebaseAuth.getCurrentUser()?.displayName) } + 1
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            FirestoreService.saveStats(partyCode, player, position)
+        }
+
+    }
+
+    fun init() {
+        lifecycleScope.launch(Dispatchers.IO) {
             val data = FirestoreService.getPlayersDataAfterGame(partyCode)
 
             withContext(Dispatchers.Main) {
-
-                players.clear()
-                data.forEach {
-                    players.add(it)
-                }
-
-                binding.rankingRecView.adapter?.notifyDataSetChanged()
-
+                setRecview(data)
+                saveStats(data)
             }
-
         }
+    }
+
+    fun setRecview(plist: MutableList<FirestorePlayersChosesDataClass>) {
+        players.clear()
+        plist.forEach {
+            players.add(it)
+        }
+
+        binding.rankingRecView.adapter?.notifyDataSetChanged()
     }
 
     interface PostGameInterface {

@@ -269,6 +269,37 @@ class FirestoreService {
 
         }
 
+        suspend fun saveStats(partyCode: String, p: FirestorePlayersChosesDataClass, playerPosition: Int): Boolean {
+
+            try {
+                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.email!!)
+
+
+                if (doc.get().await().exists()) {
+                    doc.update(
+                        hashMapOf(
+                            partyCode to p.grammar,
+                            "position" to playerPosition
+                        ) as Map<String, Any>
+                    ).await()
+
+                } else {
+                    doc.set(
+                        hashMapOf(
+                            partyCode to p.grammar,
+                            "position" to playerPosition
+                        ) as Map<String, Any>
+                    ).await()
+                }
+
+
+                return true
+            } catch (e: Exception) {
+                return false
+            }
+
+        }
+
     }
     interface firestoreServiceInterface {
         fun startGame(partyCode: String)
