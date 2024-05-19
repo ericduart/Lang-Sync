@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.snapshots
 import es.ericd.langsync.dataclases.FirestoreDocDataClass
 import es.ericd.langsync.dataclases.FirestorePlayersChosesDataClass
@@ -274,24 +275,14 @@ class FirestoreService {
             try {
                 var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.email!!)
 
+                var data = hashMapOf(
+                    partyCode to hashMapOf(
+                        "data" to p.grammar,
+                        "position" to playerPosition
+                    )
+                )
 
-                if (doc.get().await().exists()) {
-                    doc.update(
-                        hashMapOf(
-                            partyCode to p.grammar,
-                            "position" to playerPosition
-                        ) as Map<String, Any>
-                    ).await()
-
-                } else {
-                    doc.set(
-                        hashMapOf(
-                            partyCode to p.grammar,
-                            "position" to playerPosition
-                        ) as Map<String, Any>
-                    ).await()
-                }
-
+                doc.set(data, SetOptions.merge()).await()
 
                 return true
             } catch (e: Exception) {
