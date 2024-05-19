@@ -29,14 +29,22 @@ namespace LangSyncServer.utils
 
         public static void ChangeLabelTextSafe(Label label, string newText)
         {
-            if (label.Dispatcher.CheckAccess())
+
+            try {
+                if (label.Dispatcher.CheckAccess())
+                {
+                    label.Content = newText;
+                }
+                else
+                {
+                    label.Dispatcher.Invoke(new Action(() => { label.Content = newText; }));
+                }
+
+            } catch(Exception e)
             {
-                label.Content = newText;
+                logging("Exception -> " + e.Message);
             }
-            else
-            {
-                label.Dispatcher.Invoke(new Action(() => { label.Content = newText; }));
-            }
+
         }
 
         public static void AddLabelToWrapPanelSafe(WrapPanel panel, Label label)

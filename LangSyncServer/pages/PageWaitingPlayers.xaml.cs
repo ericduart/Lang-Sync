@@ -22,15 +22,13 @@ namespace LangSyncServer.pages
     /// </summary>
     public partial class PageWaitingPlayers : Page
     {
+
+        private List<Constants.GrammarItem> grammarItems;
+
         public PageWaitingPlayers(List<Constants.GrammarItem> items)
         {
+            grammarItems = items;
             InitializeComponent();
-
-            Task.Run(() => {
-
-                getPartyCode(items);
-
-            });
 
         }
 
@@ -69,6 +67,15 @@ namespace LangSyncServer.pages
         {
             Helpers.AddLabelToWrapPanelSafe(WrapPlayers, player);
             utils.Helpers.logging("added player");
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() => {
+
+                getPartyCode(grammarItems);
+
+            });
         }
     }
 }

@@ -38,11 +38,19 @@ namespace LangSyncServer.windows
 
         public static EventHandler<string> partyCodeFound;
 
+        private PageWaitingPlayers pageWaitingPlayers;
+        private PagePlayersData pagePlayersData;
+
+
         public WindowWaitingPlayers(List<Constants.GrammarItem> items)
         {
             InitializeComponent();
             this.grammarItems = items;
-            content.Content = new pages.PageWaitingPlayers(grammarItems);
+
+            pagePlayersData = new PagePlayersData();
+            pageWaitingPlayers = new PageWaitingPlayers(grammarItems);
+
+            content.Content = pageWaitingPlayers;
 
             players = new List<string>();
             playersData = new List<PlayerData>();
@@ -113,31 +121,15 @@ namespace LangSyncServer.windows
                     };
 
 
-
-                    if (!string.IsNullOrEmpty(currentGrammar.english))
+                    if (isGameStarted)
                     {
-                        // tabControl1.Invoke(new Action(() => { tabControl1.SelectedIndex = 1; }));
-                        // CHANGE PAGE
-
-                        Application.Current.Dispatcher.Invoke(delegate () {
-                            content.Content = new PagePlayersData();
+                        Application.Current.Dispatcher.Invoke(() => {
+                            content.Content = pagePlayersData;
                         });
 
+                        pagePlayersData.setGrammarInfo(currentGrammar);
+                        pagePlayersData.setPlayersCount(0, players.Count);
                     }
-
-                    PagePlayersData pagePlayersData = null;
-
-                    Application.Current.Dispatcher.Invoke(delegate () {
-                        pagePlayersData = content.Content as PagePlayersData;
-                    });
-
-                    pagePlayersData?.setGrammarInfo(currentGrammar);
-
-                    //// Players answered count
-
-                    //Helpers.changeLabelTextSafe(lblPlayersAnswered, $"0/{players.Count}");
-                    pagePlayersData?.setPlayersCount(0, players.Count);
-
 
                 }
                 catch (Exception ex)
@@ -156,18 +148,12 @@ namespace LangSyncServer.windows
                 try
                 {
 
-                    PagePlayersData pagePlayersData = null;
-
-                    Application.Current.Dispatcher.Invoke(delegate () {
-                        pagePlayersData = content.Content as PagePlayersData;
-                    });
-
 
                     if (currentGrammar == null) return;
 
 
                     playersData.Clear();
-                    pagePlayersData?.clearDataGrid();
+                    pagePlayersData.clearDataGrid();
 
                     foreach (DocumentSnapshot doc in snapshot.Documents)
                     {
@@ -190,7 +176,7 @@ namespace LangSyncServer.windows
 
                                 playersData.Add(p);
 
-                                pagePlayersData?.setPlayerData(p);
+                                pagePlayersData.setPlayerData(p);
 
                             }
 
@@ -198,7 +184,7 @@ namespace LangSyncServer.windows
 
                     }
 
-                    if (playersData.Count > 0) pagePlayersData?.setPlayersCount(playersData.Count, players.Count);
+                    if (playersData.Count > 0) pagePlayersData.setPlayersCount(playersData.Count, players.Count);
                 } catch (Exception ex)
                 {
                     utils.Helpers.logging(ex.Message);
@@ -243,8 +229,8 @@ namespace LangSyncServer.windows
 
             } else
             {
-                await partyRef.UpdateAsync(new Dictionary<string, object>() { { "currentGrammar", new { english = currentGrammar.english, spanish = currentGrammar.spanish } } });
                 isGameStarted = true;
+                await partyRef.UpdateAsync(new Dictionary<string, object>() { { "currentGrammar", new { english = currentGrammar.english, spanish = currentGrammar.spanish } } });
             }
         }
     }
