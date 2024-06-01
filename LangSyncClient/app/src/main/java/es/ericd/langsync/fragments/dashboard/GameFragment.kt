@@ -12,6 +12,7 @@ import es.ericd.langsync.databinding.FragmentGameBinding
 import es.ericd.langsync.services.FirebaseAuth
 import es.ericd.langsync.services.FirestoreService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -22,6 +23,9 @@ class GameFragment : Fragment() {
     private var grammarSpanish: String = ""
     private var grammarList: List<HashMap<String, String>> = emptyList()
     lateinit var binding: FragmentGameBinding
+
+    private var listenerJob: Job? = null
+
 
     var mInterace: GameFragmentInterface? = null
 
@@ -74,7 +78,7 @@ class GameFragment : Fragment() {
     }
 
     fun setListeners() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        listenerJob = lifecycleScope.launch(Dispatchers.IO) {
             FirestoreService.getDocPlayersChanges(partyCode, GAME).collect {
                 withContext(Dispatchers.Main) {
 
@@ -90,6 +94,7 @@ class GameFragment : Fragment() {
                     grammarList = it.grammarList
 
                     if (it.gameEnded) {
+                        stopListener()
                         mInterace?.showEndingGameFragment(partyCode)
                     }
 
@@ -97,6 +102,13 @@ class GameFragment : Fragment() {
             }
 
         }
+    }
+
+    fun stopListener() {
+        if (listenerJob?.isActive ?: false) {
+            listenerJob?.cancel()
+        }
+
     }
 
     fun setPlayersListener() {
