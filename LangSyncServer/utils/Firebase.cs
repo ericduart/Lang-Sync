@@ -15,15 +15,11 @@ namespace LangSyncServer.utils
         static string filepath = "";
         private static string PARTIES_COLLECTION_NAME = "parties";
 
-        public static async void init()
+        public static async void init(string fireConfigContent)
         {
 
-            string fireconfigFile = Path.Combine(Helpers.getRoot(), "firebase_config.json");
-
-            string fireconfigContent = File.ReadAllText(fireconfigFile);
-
             filepath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName())) + ".json";
-            File.WriteAllText(filepath, fireconfigContent);
+            File.WriteAllText(filepath, fireConfigContent);
             File.SetAttributes(filepath, FileAttributes.Hidden);
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
 

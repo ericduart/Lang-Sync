@@ -21,9 +21,7 @@ namespace LangSyncServer.config
 
             foreach (var line in File.ReadAllLines(filePath))
             {
-                var parts = line.Split(
-                    '=',
-                    StringSplitOptions.RemoveEmptyEntries);
+                var parts = line.Split('=', 2);
 
                 if (parts.Length != 2)
                     continue;
