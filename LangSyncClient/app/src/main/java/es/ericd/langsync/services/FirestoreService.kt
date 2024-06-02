@@ -3,7 +3,9 @@ package es.ericd.langsync.services
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.SetOptions
@@ -14,7 +16,12 @@ import es.ericd.langsync.dataclases.FirestorePlayersDataGrammar
 import es.ericd.langsync.dataclases.FirestoreViewModelDataClass
 import es.ericd.langsync.dataclases.PlayerDataPostGame
 import es.ericd.langsync.dataclases.PlayerInputs
+import es.ericd.langsync.dataclases.PlayerPoints
+import es.ericd.langsync.dataclases.StatItem
+import es.ericd.langsync.dataclases.StatsData
+import es.ericd.langsync.dataclases.StatsPartyData
 import es.ericd.langsync.fragments.dashboard.PregameFragment
+import es.ericd.langsync.utils.Utils
 import es.ericd.langsync.viewModels.FirestoreViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -273,21 +280,115 @@ class FirestoreService {
         suspend fun saveStats(partyCode: String, p: FirestorePlayersChosesDataClass, playerPosition: Int): Boolean {
 
             try {
-                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.email!!)
+
+                val points = Utils.getPostionsPoints()
+
+                val playerPoints = points.get(playerPosition) ?: 0
+
+                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.displayName!!)
 
                 var data = hashMapOf(
                     partyCode to hashMapOf(
                         "data" to p.grammar,
-                        "position" to playerPosition
+                        "position" to playerPosition,
+                        "timestamp" to Timestamp.now(),
+                        "points" to playerPoints
                     )
                 )
 
                 doc.set(data, SetOptions.merge()).await()
+                doc.update("points", FieldValue.increment(playerPoints.toLong())).await()
 
                 return true
             } catch (e: Exception) {
                 return false
             }
+
+        }
+
+        suspend fun getStats(): StatsData {
+
+            val stats = StatsData(
+                points = 0,
+                partyData = mutableListOf<StatsPartyData>()
+            )
+
+            try {
+                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.email!!)
+
+                var data = doc.get().await()
+
+                stats.points = data.get("points") as Long? ?: 0
+
+                data.data?.forEach {
+
+                    if (!it.key.equals("points")) {
+
+                        val partyData = it.value as HashMap<*, *>
+                        val partyCode = it.key
+
+                        val position = partyData.get("position") as Long
+                        val timestamp = partyData.get("timestamp") as Timestamp
+
+                        val items = partyData.get("data") as List<HashMap<*, *>>
+
+
+
+                        val statsItems = mutableListOf<StatItem>()
+
+                        items.forEach {
+                            statsItems.add(
+                                StatItem(
+                                    isCorrect = it.get("correct") as Boolean,
+                                    toGet = it.get("name") as String,
+                                    userInput = it.get("userInput") as String
+                                )
+                            )
+                        }
+
+                        val partyStats =
+                            StatsPartyData(
+                                position = position,
+                                timestamp = timestamp,
+                                partyCode = partyCode,
+                                data = statsItems
+                            )
+
+
+                        stats.partyData.add(partyStats)
+
+                    }
+
+
+
+
+                }
+
+            } catch (e: Exception) {
+                return stats
+            }
+
+            return stats
+        }
+
+        suspend fun getAllPlayersPoints(): MutableList<PlayerPoints> {
+            var playersCollection = getInstance().collection("stats")
+
+            var list = mutableListOf<PlayerPoints>()
+
+            val snapshots = playersCollection.get().await()
+
+            snapshots.documents.forEach{
+                list.add(PlayerPoints(
+                    player = it.id,
+                    points = it.get("points") as Long? ?: 0
+                ))
+            }
+
+            list = list.sortedByDescending { it.points }.toMutableList()
+
+            return list
+
 
         }
 

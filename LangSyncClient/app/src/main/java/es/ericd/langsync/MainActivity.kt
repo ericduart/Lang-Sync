@@ -13,6 +13,7 @@ import es.ericd.langsync.fragments.dashboard.GameFragment
 import es.ericd.langsync.fragments.dashboard.MenuFragment
 import es.ericd.langsync.fragments.dashboard.PostGameFragment
 import es.ericd.langsync.fragments.dashboard.PregameFragment
+import es.ericd.langsync.fragments.dashboard.StatsFragment
 import es.ericd.langsync.fragments.logins.LoginFragment
 import es.ericd.langsync.fragments.logins.SignupFragment
 import es.ericd.langsync.services.FirestoreService
@@ -59,6 +60,14 @@ class MainActivity : AppCompatActivity(), MenuFragment.MenuFragmentInterface, Ga
         supportFragmentManager.commit {
             addToBackStack(null)
             replace<PregameFragment>(binding.fragmentContainerView.id, args = mbundle)
+            setReorderingAllowed(true)
+        }
+    }
+
+    override fun getStats() {
+        supportFragmentManager.commit {
+            addToBackStack(null)
+            replace<StatsFragment>(binding.fragmentContainerView.id)
             setReorderingAllowed(true)
         }
     }

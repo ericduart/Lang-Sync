@@ -68,11 +68,16 @@ class MenuFragment : Fragment() {
             PlayPrivateGameDialogFragment(joinParty).show(requireActivity().supportFragmentManager, "GAME_DIALOG")
         }
 
+        binding.btnStats.setOnClickListener {
+            menuInterface?.getStats()
+        }
+
         return binding.root
     }
 
     interface MenuFragmentInterface {
         fun openPreGame(partyGame: String)
+        fun getStats()
     }
 
 }
