@@ -4,6 +4,7 @@ using LangSyncServer.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -74,14 +75,6 @@ namespace LangSyncServer.windows
                 try
                 {
 
-                    PageWaitingPlayers page1 = null;
-
-
-                    Application.Current.Dispatcher.Invoke(delegate () {
-                        page1 = content.Content as PageWaitingPlayers;
-                    });
-
-
                     // PLAYERS
 
                     if (!isGameStarted)
@@ -89,7 +82,7 @@ namespace LangSyncServer.windows
                         string[] firebasePlayers = snapshot.GetValue<string[]>("players");
 
                         // Helpers.CleanFlowLayoutContentSafe(flowLayoutPanel1);
-                        page1?.clearWrapPanel();
+                        pageWaitingPlayers.clearWrapPanel();
 
                         players.Clear();
 
@@ -100,10 +93,14 @@ namespace LangSyncServer.windows
 
                                 Label playerLabel = new Label();
                                 playerLabel.Content = player;
+                                playerLabel.Padding = new Thickness(50, 10, 50, 10);
+                                playerLabel.BorderThickness = new Thickness(0, 0, 0, 2);
+                                playerLabel.BorderBrush = new SolidColorBrush(Colors.Crimson);
+                                playerLabel.Margin = new Thickness(10, 0, 10, 0);
 
                                 players.Add(player);
 
-                                page1?.addPlayer(playerLabel);
+                                pageWaitingPlayers.addPlayer(playerLabel);
 
                             });
 
@@ -123,8 +120,15 @@ namespace LangSyncServer.windows
 
                     if (isGameStarted)
                     {
+
                         Application.Current.Dispatcher.Invoke(() => {
                             content.Content = pagePlayersData;
+                        });
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            this.Title = "On a match";
+                            primaryBtn.Content = "Next verb";
                         });
 
                         pagePlayersData.setGrammarInfo(currentGrammar);

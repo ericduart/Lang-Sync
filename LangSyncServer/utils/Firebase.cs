@@ -23,7 +23,7 @@ namespace LangSyncServer.utils
             File.SetAttributes(filepath, FileAttributes.Hidden);
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
 
-            string value = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
+            //string value = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
 
             database = FirestoreDb.Create("lang-sync");
 

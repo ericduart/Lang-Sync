@@ -15,6 +15,7 @@
   <ItemGroup>
     <None Remove="assets\Cross.png" />
     <None Remove="assets\Tick.png" />
+    <None Remove="logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,7 @@
   <ItemGroup>
     <Resource Include="assets\Cross.png" />
     <Resource Include="assets\Tick.png" />
+    <Resource Include="assets\logo.png" />
   </ItemGroup>
 
 </Project>

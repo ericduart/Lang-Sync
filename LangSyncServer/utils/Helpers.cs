@@ -31,7 +31,7 @@ namespace LangSyncServer.utils
 
         }
 
-        public static void ChangeLabelTextSafe(Label label, string newText)
+        public static void ChangeLabelTextSafeOld(Label label, string newText)
         {
 
             try {
@@ -47,6 +47,33 @@ namespace LangSyncServer.utils
             } catch(Exception e)
             {
                 logging("Exception -> " + e.Message);
+            }
+
+        }
+
+        public static void ChangeControlTextSafe(Control control, string text)
+        {
+
+            if (!control.Dispatcher.CheckAccess())
+            {
+                control.Dispatcher.Invoke(new Action(() => {
+                    ChangeControlTextSafe(control, text);
+                }));
+                return;
+            }
+
+            switch(control)
+            {
+                case Button button:
+                    button.Content = text;
+                    break;
+
+                case Label label:
+                    label.Content = text;
+                    break;
+
+                default:
+                    break;
             }
 
         }

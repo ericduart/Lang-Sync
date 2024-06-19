@@ -30,6 +30,7 @@ namespace LangSyncServer
             WindowGrammar window = new WindowGrammar();
 
             window.Show();
+            
             Close();
 
         }
@@ -40,7 +41,7 @@ namespace LangSyncServer
             Task.Run(() =>
             {
 
-                Helpers.ChangeLabelTextSafe(lblInfo, "Loading Modules");
+                Helpers.ChangeControlTextSafe(lblInfo, "Loading Modules");
                 Thread.Sleep(1000);
 
                 string dotEnv = Path.Combine(Helpers.getRoot(), ".env");
@@ -64,7 +65,7 @@ namespace LangSyncServer
 
                 Helpers.initLogs();
 
-                Helpers.ChangeLabelTextSafe(lblInfo, "Loading Firebase");
+                Helpers.ChangeControlTextSafe(lblInfo, "Loading Firebase");
 
                 Thread.Sleep(500);
                 Firebase.init(decodedFirebaseConfig);

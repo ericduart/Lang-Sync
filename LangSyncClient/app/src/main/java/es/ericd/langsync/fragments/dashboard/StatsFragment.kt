@@ -56,7 +56,11 @@ class StatsFragment : Fragment() {
 
             withContext(Dispatchers.Main) {
 
-                if (stats.partyData.isEmpty()) return@withContext
+                if (stats.partyData.isEmpty()) {
+                    binding.tvAvgPosition.text = "Not found"
+                    binding.tvMostFailedVerb.text = "Not found"
+                    return@withContext
+                }
 
                 val totalPostion = stats.partyData.sumOf { it.position }
 

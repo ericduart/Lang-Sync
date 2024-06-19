@@ -6,16 +6,20 @@
         ResizeMode="NoResize"
         xmlns:local="clr-namespace:LangSyncServer.windows"
         mc:Ignorable="d"
-        Title="WindowMSG" Height="250" Width="500">
+        Height="250" Width="500"
+        Icon="/assets/logo.png"
+        Title="Message"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
         <Label x:Name="lblMessage" Content="Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="0,20,0,0" HorizontalContentAlignment="Center"/>
 
 
         <WrapPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,00,00,50">
-            <Button Width="100" Height="100" Padding="10" HorizontalAlignment="Left" Click="Button_Click">
+            <Button Width="100" Height="100" Padding="10" HorizontalAlignment="Left" Click="Button_Click" Background="White">
                 <Image Source="/assets/Tick.png" />
             </Button>
-            <Button Width="100" Height="100" Padding="10" HorizontalAlignment="Left" Margin="20,0,0,0" Click="Button_Click_1">
+            <Button Width="100" Height="100" Padding="10" HorizontalAlignment="Left" Margin="20,0,0,0" Click="Button_Click_1" Background="White">
                 <Image Source="/assets/Cross.png" />
             </Button>
         </WrapPanel>

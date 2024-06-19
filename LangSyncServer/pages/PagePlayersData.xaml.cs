@@ -31,8 +31,8 @@ namespace LangSyncServer.pages
         {
             try
             {
-                Helpers.ChangeLabelTextSafe(englishGrammar, item.english);
-                Helpers.ChangeLabelTextSafe(spanishGrammar, item.spanish);
+                Helpers.ChangeControlTextSafe(englishGrammar, item.english);
+                Helpers.ChangeControlTextSafe(spanishGrammar, item.spanish);
 
             } catch(Exception ex) {
 
@@ -45,7 +45,7 @@ namespace LangSyncServer.pages
         {
             try
             {
-                Helpers.ChangeLabelTextSafe(playersCount, $"{numPlayersanswered}/{total}");
+                Helpers.ChangeControlTextSafe(playersCount, $"{numPlayersanswered}/{total}");
 
             }
             catch (Exception ex)
@@ -58,15 +58,19 @@ namespace LangSyncServer.pages
 
         public void setPlayerData(Constants.PlayerData pData)
         {
-            if (dataGridPlayersData.CheckAccess()) {
-                dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect });
 
-            } else
+            if (!dataGridPlayersData.CheckAccess())
             {
-                dataGridPlayersData.Dispatcher.Invoke(new Action(() => {
-                    dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect });
+                dataGridPlayersData.Dispatcher.Invoke(new Action(() =>
+                {
+                    setPlayerData(pData);
                 }));
+
+                return;
+
             }
+
+            dataGridPlayersData.Items.Add(new { option = pData.grammar, userInput = pData.userInput, isCorrect = pData.isCorrect, IsError = !pData.isCorrect });
         }
 
         public void clearDataGrid()

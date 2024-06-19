@@ -13,6 +13,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="English"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Input"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,6 +62,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="Is correct"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

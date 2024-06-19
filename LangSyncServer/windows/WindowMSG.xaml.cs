@@ -23,6 +23,7 @@ namespace LangSyncServer.windows
         {
             InitializeComponent();
 
+            Title = message;
             lblMessage.Content = message;            
 
         }

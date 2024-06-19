@@ -7,54 +7,76 @@
     tools:context=".fragments.dashboard.GameFragment">
 
 
+    <!-- Position TextView -->
     <TextView
         android:id="@+id/tvPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Position"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Points TextView -->
     <TextView
         android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tvPosition"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:text="Points"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPosition" />
 
+    <!-- Current Grammar TextView -->
     <TextView
         android:id="@+id/tvCurrentGrammar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:layout_marginTop="60dp"
+        android:text="Current Grammar"
+        android:textColor="#FF6200EE"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Player Grammar EditText -->
     <EditText
         android:id="@+id/etPlayerGrammar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:inputType="text"
+        android:background="@drawable/rounded_edittext_background"
+        android:padding="10dp"
+        android:textColor="#FF6200EE"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCurrentGrammar" />
+        app:layout_constraintTop_toBottomOf="@id/tvCurrentGrammar" />
 
+    <!-- Send Button -->
     <Button
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Send"
+        android:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlayerGrammar" />
+        app:layout_constraintTop_toBottomOf="@id/etPlayerGrammar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

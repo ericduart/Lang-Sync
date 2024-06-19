@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LangSyncServer.windows"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Icon="/assets/logo.png"
         Title="WindowPostGame" Height="450" Width="800">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="Auto">
@@ -13,6 +15,12 @@
             </StackPanel>
         </ScrollViewer>
         <DataGrid HorizontalAlignment="Stretch" Margin="242,20,20,65" x:Name="dataGridPlayerData">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="LightSalmon" />
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="English" Width="*" Binding="{Binding option}" />
                 <DataGridTextColumn Header="USER INPUT" Width="*" Binding="{Binding userInput}"/>
@@ -20,7 +28,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Close" Width="150" Height="40" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="242,0,0,10" Click="Button_Click" />
+        <Button Content="Close" Style="{StaticResource primaryButton}"  Width="150" Height="40" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="242,0,0,10" Click="Button_Click" />
 
     </Grid>
 </Window>

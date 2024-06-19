@@ -75,13 +75,13 @@ class LoginActivity : AppCompatActivity(), LoginFragment.LoginFragmentInterface,
                 FirebaseAuth.registerUser(email, displayName, pwd)
 
                 withContext(Dispatchers.Main) {
-                    Snackbar.make(rootView, "holaaa", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(rootView, "Account created", Snackbar.LENGTH_LONG).show()
                 }
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     val rootView: View = findViewById(android.R.id.content)
-                    Snackbar.make(rootView, "hola -> " + e.message, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(rootView, "Unexpected error occurred", Snackbar.LENGTH_LONG).show()
                 }
             }
 

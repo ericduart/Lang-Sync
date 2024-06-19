@@ -5,6 +5,154 @@
              StartupUri="MainWindow.xaml"
              >
     <Application.Resources>
-         
+
+        <Color x:Key="DominantColor">#FFFF0000</Color>
+        <Color x:Key="SecondaryColor">#2ecc71</Color>
+        <Color x:Key="AccentColor">#e74c3c</Color>
+
+        <!-- Dark Hover Colors -->
+        <Color x:Key="DarkHoverDominantColor">#217dbb</Color>
+        <Color x:Key="DarkHoverSecondaryColor">#27ae60</Color>
+        <Color x:Key="DarkHoverAccentColor">#c0392b</Color>
+
+        <SolidColorBrush x:Key="DominantBrush" Color="{StaticResource DominantColor}" />
+
+        <Style TargetType="Button" x:Key="btnBlue" BasedOn="{StaticResource {x:Type Button}}">
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnGreen">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+CornerRadius="5"
+BorderThickness="1"
+Padding="5"
+BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnLightRed">
+            <Setter Property="Background" Value="{StaticResource DominantBrush}"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+CornerRadius="5"
+BorderThickness="1"
+Padding="5"
+BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Crimson"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="primaryButton">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#000" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="LightCoral" />
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderThickness="2"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                                >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Crimson" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="primaryTextInput">
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="BorderBrush" Value="LightSalmon" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border 
+                    Name="border" 
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2">
+                            <ScrollViewer 
+                        Margin="0" 
+                        x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Crimson" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="Crimson" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ConditionalDataGridRowStyle" TargetType="DataGridRow">
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsError}" Value="True">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsError}" Value="False">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Green"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>

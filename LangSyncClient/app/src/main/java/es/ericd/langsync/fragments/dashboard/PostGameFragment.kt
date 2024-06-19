@@ -53,10 +53,7 @@ class PostGameFragment : Fragment() {
 
         binding = FragmentPostGameBinding.inflate(inflater)
 
-        val inputClick = { inputs: List<FirestorePlayersDataGrammar> ->
-
-            ShowDataPostGameDialogFragment("", inputs.toMutableList()).show(requireActivity().supportFragmentManager, "")
-        }
+        val inputClick = { inputs: List<FirestorePlayersDataGrammar> -> }
 
         binding.rankingRecView.adapter = RankingAdapter(requireContext(), players, inputClick)
         binding.rankingRecView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

@@ -1,6 +1,7 @@
 package es.ericd.langsync.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,12 @@ class PlayerInputsAdapter(val context: Context, val inputs: MutableList<Firestor
             tvEnglish.text = item.name
             tvInput.text = item.userInput
             tvIsCorrect.text = item.isCorrect.toString()
+            // if item is correct print it green
+            if (item.isCorrect) {
+                tvIsCorrect.setTextColor(Color.GREEN)
+            } else {
+                tvIsCorrect.setTextColor(Color.RED)
+            }
 
         }
     }

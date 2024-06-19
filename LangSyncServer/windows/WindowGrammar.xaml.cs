@@ -2,6 +2,7 @@
 using LangSyncServer.utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,8 @@ namespace LangSyncServer.windows
 
         private void btnAddGrammar_Click(object sender, RoutedEventArgs e)
         {
+
+            if (tbEnglish.Text.Length == 0 || tbSpanish.Text.Length == 0) return;
 
             Constants.GrammarItem data = new Constants.GrammarItem();
 

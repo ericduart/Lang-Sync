@@ -122,16 +122,16 @@ class GameFragment : Fragment() {
                     val position = sortedData.indexOfFirst { it.user.equals(FirebaseAuth.getCurrentUser()?.displayName) }
 
                     if (position != -1) {
-                        binding.tvPosition.text = "${position + 1}"
+                        binding.tvPosition.text = "Position: ${position + 1}"
                     } else {
-                        binding.tvPosition.text = "${sortedData.size}"
+                        binding.tvPosition.text = "Position: ${sortedData.size}"
                     }
 
                     val currentPlayerData = sortedData.find { it.user.equals(FirebaseAuth.getCurrentUser()?.displayName) }
 
                     val numPoints = currentPlayerData?.grammar?.count{it.isCorrect}
 
-                    binding.tvPoints.text = "${numPoints ?: "0"}"
+                    binding.tvPoints.text = "Points: ${numPoints ?: "0"}"
 
 
                 }

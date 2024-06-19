@@ -13,7 +13,7 @@ import es.ericd.langsync.dataclases.FirestorePlayersChosesDataClass
 import es.ericd.langsync.dataclases.FirestorePlayersDataGrammar
 import es.ericd.langsync.dataclases.PlayerDataPostGame
 
-class RankingAdapter(val context: Context, val rankingItems: MutableList<FirestorePlayersChosesDataClass>, val clickItem: (inputs: List<FirestorePlayersDataGrammar>) -> Unit): RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
+class RankingAdapter(val context: Context, val rankingItems: MutableList<FirestorePlayersChosesDataClass>, val clickItem: (inputs: List<FirestorePlayersDataGrammar>) -> Unit?): RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
 
     class RankingViewHolder(view: View): RecyclerView.ViewHolder(view) {
 

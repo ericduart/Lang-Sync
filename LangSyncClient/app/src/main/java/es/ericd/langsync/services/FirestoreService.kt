@@ -285,15 +285,15 @@ class FirestoreService {
 
                 val playerPoints = points.get(playerPosition) ?: 0
 
-                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.displayName!!)
+                var doc = getInstance().collection("stats").document(FirebaseAuth.getCurrentUser()?.email!!)
 
                 var data = hashMapOf(
                     partyCode to hashMapOf(
                         "data" to p.grammar,
                         "position" to playerPosition,
-                        "timestamp" to Timestamp.now(),
-                        "points" to playerPoints
-                    )
+                        "timestamp" to Timestamp.now()
+                    ),
+                    "displayName" to FirebaseAuth.getCurrentUser()?.displayName!!
                 )
 
                 doc.set(data, SetOptions.merge()).await()
@@ -322,8 +322,7 @@ class FirestoreService {
 
                 data.data?.forEach {
 
-                    if (!it.key.equals("points")) {
-
+                    if (!it.key.equals("points") && !it.key.equals("displayName")) {
                         val partyData = it.value as HashMap<*, *>
                         val partyCode = it.key
 
@@ -356,14 +355,8 @@ class FirestoreService {
 
 
                         stats.partyData.add(partyStats)
-
                     }
-
-
-
-
                 }
-
             } catch (e: Exception) {
                 return stats
             }
@@ -380,7 +373,7 @@ class FirestoreService {
 
             snapshots.documents.forEach{
                 list.add(PlayerPoints(
-                    player = it.id,
+                    player = it.get("displayName") as String? ?: it.id,
                     points = it.get("points") as Long? ?: 0
                 ))
             }

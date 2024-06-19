@@ -45,7 +45,7 @@ namespace LangSyncServer.pages
 
                 if (res)
                 {
-                    Helpers.ChangeLabelTextSafe(lblPartyCode, randomPartyCode);
+                    Helpers.ChangeControlTextSafe(lblPartyCode, randomPartyCode);
                     break;
                 } else
                 {

@@ -15,6 +15,7 @@
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <!-- Contenido de la página aquí -->
         <Label x:Name="lblPartyCode" Content="Party Code..." HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0" HorizontalContentAlignment="Right" />
-        <WrapPanel x:Name="WrapPlayers" Width="{Binding ActualWidth}" Margin="0,60,0,0"/>
+        <Label x:Name="waitingplayers" Content="Players joined" Margin="50,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <WrapPanel x:Name="WrapPlayers" Width="{Binding ActualWidth}" Margin="50,60,50,60"/>
     </Grid>
 </Page>
